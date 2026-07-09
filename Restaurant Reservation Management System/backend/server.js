@@ -44,9 +44,12 @@ const startServer = async () => {
   app.use(errorHandler);
 
   const PORT = process.env.PORT || 5000;
-  const server = app.listen(PORT, () => {
-    console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-  });
+  let server;
+  if (!process.env.VERCEL) {
+    server = app.listen(PORT, () => {
+      console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+    });
+  }
 
   // Export app & server for integration tests
   return { app, server };

@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "Restaurant Reservation Management System/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "api/index.js"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "Restaurant Reservation Management System/frontend/dist/assets/$1"
+    },
+    {
+      "src": "/icons.svg",
+      "dest": "Restaurant Reservation Management System/frontend/dist/icons.svg"
+    },
+    {
+      "src": "/favicon.svg",
+      "dest": "Restaurant Reservation Management System/frontend/dist/favicon.svg"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "Restaurant Reservation Management System/frontend/dist/index.html"
+    }
+  ]
+}
