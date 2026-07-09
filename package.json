@@ -6,6 +6,7 @@
     "install-all": "npm run install-all --prefix \"Restaurant Reservation Management System\"",
     "build": "npm install --prefix \"Restaurant Reservation Management System/frontend\" && npm run build --prefix \"Restaurant Reservation Management System/frontend\"",
     "dev": "npm run dev --prefix \"Restaurant Reservation Management System\"",
+    "start": "node \"Restaurant Reservation Management System/backend/server.js\"",
     "start:backend": "npm run start:backend --prefix \"Restaurant Reservation Management System\"",
     "start:frontend": "npm run start:frontend --prefix \"Restaurant Reservation Management System\"",
     "test:backend": "npm run test:backend --prefix \"Restaurant Reservation Management System\""

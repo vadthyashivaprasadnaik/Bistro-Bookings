@@ -35,10 +35,25 @@ const startServer = async () => {
   app.use('/api/tables', tableRoutes);
   app.use('/api/reservations', reservationRoutes);
 
-  // Home route
-  app.get('/', (req, res) => {
-    res.json({ message: 'Welcome to the Restaurant Reservation Management System API' });
-  });
+  // Serve static assets in production if built
+  const path = require('path');
+  const fs = require('fs');
+  const distPath = path.join(__dirname, '../../dist');
+
+  if (fs.existsSync(distPath)) {
+    console.log(`Serving static frontend from: ${distPath}`);
+    app.use(express.static(distPath));
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api')) {
+        return next();
+      }
+      res.sendFile(path.join(distPath, 'index.html'));
+    });
+  } else {
+    app.get('/', (req, res) => {
+      res.json({ message: 'Welcome to the Restaurant Reservation Management System API' });
+    });
+  }
 
   // Centralized Error handler middleware
   app.use(errorHandler);
